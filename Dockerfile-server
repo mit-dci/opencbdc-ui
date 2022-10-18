@@ -1,0 +1,19 @@
+FROM public.ecr.aws/docker/library/node:14.17.0-alpine
+
+# make the 'app' folder the current working directory
+WORKDIR /app
+
+# copy both 'package.json' and 'package-lock.json' (if available)
+COPY ./server/package*.json ./
+
+# install project dependencies
+RUN npm install
+RUN npm install -g nodemon
+
+# copy project files and folders to the current working directory (i.e. 'app' folder)
+COPY ./server /app
+
+RUN ["chmod", "+x", "/app/scripts/start-dev.sh"]
+RUN ["chmod", "+x", "/app/scripts/start.sh"]
+
+CMD ["/app/scripts/start.sh"]

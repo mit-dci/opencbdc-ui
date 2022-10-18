@@ -1,0 +1,63 @@
+version: '3'
+
+networks:
+  cbdc-wallet:
+    driver: bridge
+
+services:
+
+  frontend:
+    build: .
+    image: cbdc-frontend
+    command: http-server dist
+    ports:
+      - 8080:8080
+        #volumes:
+        #  - $PWD/src:/app/src
+        #  - $PWD/dist:/app/dist
+    environment:
+      ENVIRONMENT: local
+      BASE_URL: "http://localhost:3000/api/"
+    depends_on:
+      - api
+    networks:
+      - cbdc-wallet
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile-server
+    image: cbdc-api
+    environment:
+      ENVIRONMENT: local
+      BASE_URL: "http://localhost:3000/api/"
+      DB_HOST: db
+      DB_NAME: wallet_dev
+      DB_USER: postgres
+      DB_PASSWORD: wallet_dev_password
+      DB_PORT: "5432"
+    ports:
+      - "3000:3000"
+        #volumes:
+        #- $PWD/server:/app/server
+    links:
+      - db
+    depends_on:
+      - db
+    command:
+      - /app/scripts/start-dev.sh
+    networks:
+      - cbdc-wallet
+
+  db:
+    image: postgres:13.4
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: wallet_dev_password
+      POSTGRES_DB: wallet_dev
+    ports:
+      - "5432:5432"
+    networks:
+      - cbdc-wallet
+        #volumes:
+        #  - ./server/init.sql:/docker-entrypoint-initdb.d/init.sql

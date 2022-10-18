@@ -1,0 +1,64 @@
+{
+  "name": "cbdc-ui",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "preprocess": "browserify ./index_browserify.js --standalone cbdc > ./public/cbdc-module-bundle.js",
+    "init": "npm i && npm run preprocess && npm run serve",
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "@enumatech/secp256k1-js": "git+https://github.com/project-hamilton/secp256k1-js.git",
+    "assert": "^2.0.0",
+    "axios": "^0.26.1",
+    "bootstrap": "~4.5.0",
+    "bootstrap-vue": "^2.21.2",
+    "browserify": "^17.0.0",
+    "core-js": "^3.6.5",
+    "cors": "^2.8.5",
+    "express-session": "^1.17.3",
+    "@mit-dci/opencbdc": "0.0.2",
+    "qrcode.vue": "~1.7.0",
+    "vue": "^2.6.14",
+    "vue-clipboard3": "^1.0.1",
+    "vue-qrcode-reader": "^3.0.3",
+    "vuelidate": "^0.7.6"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.7.2",
+    "eslint-plugin-vue": "^6.2.2",
+    "vue-template-compiler": "^2.6.11"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true,
+      "es2020": true,
+      "browser": true,
+      "commonjs": true,
+      "es6": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "babel-eslint"
+    },
+    "rules": {
+      "no-unsafe-negation": "warn",
+      "no-useless-escape": "off"
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}
