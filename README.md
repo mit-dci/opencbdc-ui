@@ -11,7 +11,8 @@ It is purely a demonstration and proof-of-concept; much more functionality could
 ## Getting Started
 
 Install [`node`](https://nodejs.org/en/).
-**N.B.:** You should install the LTS version; you may run into errors trying to use a more recent version.
+**N.B.:** You should install the latest `v16` version; you may run into errors trying to use more recent versions.
+A `.nvmrc` is provided in the repository if you use [`nvm`](https://github.com/nvm-sh/nvm)
 
 * Clone the code
   ```console
