@@ -37,6 +37,12 @@
                 </template>
                 <Transaction-list :pubkey="pubkey" :txns="txs" />
             </b-tab>
+            <b-tab>
+                <template #title>
+                    Admin <b-icon class="no-icon" font-scale="1" icon="bank" ></b-icon>
+                </template>
+                <Admin />
+            </b-tab>
         </b-tabs>
   </b-card>
 </div> 
@@ -50,6 +56,7 @@ import CreateWallet from './CreateWallet.vue';
 import Receive from './Receive.vue';
 import Send from './Send.vue';
 import TransactionList from './TransactionList.vue';
+import Admin from './Admin.vue';
 const Pubkey = window.cbdc.Publickey;
 const Input = window.cbdc.Input;
 const Output = window.cbdc.Output;
@@ -66,7 +73,7 @@ const axiosCaller = axios.create({
 });
 
 export default {
-  components: { Send, CreateWallet, Receive, TransactionList },
+  components: { Send, CreateWallet, Receive, TransactionList, Admin },
   name: 'Dashboard',
   props: {
 
